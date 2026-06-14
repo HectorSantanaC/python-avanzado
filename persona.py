@@ -1,6 +1,7 @@
 class Persona:
-  
-  def inicializar_persona(self, nombre, apellido):
+
+  # Constructor __init__ (dunder - double underscore)
+  def __init__(self, nombre, apellido):
     self.nombre = nombre
     self.apellido = apellido
 
@@ -9,11 +10,10 @@ class Persona:
           Nombre: {self.nombre}
           Apellido: {self.apellido}''')
 
+# Creación de objetos
 if __name__ == '__main__':
-  persona1 = Persona()
-  persona1.inicializar_persona('Layla', 'Acosta')
+  persona1 = Persona('Layla', 'Acosta')
   persona1.mostrar_persona()
 
-  persona2 = Persona()
-  persona2.inicializar_persona('Ian', 'Sánchez')
+  persona2 = Persona('Ian', 'Sánchez')
   persona2.mostrar_persona()
