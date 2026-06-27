@@ -16,4 +16,4 @@ with open(nombre_archivo, 'r') as archivo:
 print('Leyendo el contenido con el método read')
 
 with open(nombre_archivo, 'r') as archivo:
-  print(archivo.read())
+  print(archivo.read().strip())
