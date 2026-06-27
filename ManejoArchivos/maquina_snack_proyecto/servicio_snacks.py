@@ -36,4 +36,29 @@ class ServicioSnacks:
       print(f'Error al guardar snacks en archivo: {e}')
 
   def obtener_snacks(self):
-    pass
+    snacks = []
+
+    try:
+      with open(self.NOMBRE_ARCHIVO, 'r') as archivo:
+        for linea in archivo:
+          id_snack, nombre, precio = linea.strip().split(',')
+          snack = Snack(nombre, float(precio))
+          snacks.append(snack)
+
+    except Exception as e:
+      print(f'Error al leer archivo de snacks: {e}')
+
+    return snacks
+  
+  def agregar_snack(self, snack):
+    self.snacks.append(snack)
+    self.guardar_snacks_archivo([snack])
+
+  def mostrar_snacks(self):
+    print('--- Snacks en el inventario ---')
+
+    for snack in self.snacks:
+      print(snack)
+
+  def get_snacks(self):
+    return self.snacks
