@@ -1,5 +1,5 @@
-from ManejoArchivos.maquina_snack_proyecto.servicio_snacks import ServicioSnacks
-from ManejoArchivos.maquina_snack_proyecto.snack import Snack
+from maquina_snack_proyecto.servicio_snacks import ServicioSnacks
+from maquina_snack_proyecto.snack import Snack
 
 
 class MaquinaSnacks:
@@ -53,7 +53,7 @@ class MaquinaSnacks:
     return False
   
   def comprar_snack(self):
-    id_snack = int(input('¿Que snack quieres comprar (id)?'))
+    id_snack = int(input('¿Que snack quieres comprar (id)? '))
     snacks = self.servicio_snacks.get_snacks()
 
     snack = next((snack for snack in snacks if snack.id_snack == id_snack), None)
