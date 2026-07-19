@@ -12,8 +12,6 @@ class Producto(BaseModel):
   precio: float
   en_stock: bool
 
-productos = []
-
 @app.get("/productos", response_model=list[schemas.ProductoResponse])
 def listar_productos(db:Session = Depends(get_db)):
   return crud.obtener_productos(db)
