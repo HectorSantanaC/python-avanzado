@@ -71,7 +71,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
   
   token = crear_token(sub=user.email, es_admin=user.es_admin)
 
-  return {"acces_token": token, "token_type": "bearer"}
+  return {"access_token": token, "token_type": "bearer"}
 
 @app.get("/usuarios/me", response_model=schemas.UsuarioResponse)
 def leer_perfil(current_user = Depends(get_current_user)):

@@ -1,12 +1,12 @@
 from jose import JWTError, jwt
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 SECRET_KEY = "clave_secreta"
 ALGORITHM = "HS256"
 ACCES_TOKEN_EXPIRE_MINUTES = 30
 
 def crear_token(sub: str, es_admin: bool):
-  expire = datetime.now(datetime.timezone.utc) + timedelta(minutes=ACCES_TOKEN_EXPIRE_MINUTES)
+  expire = datetime.now(timezone.utc) + timedelta(minutes=ACCES_TOKEN_EXPIRE_MINUTES)
   data = {
     "sub": sub,
     "exp": expire,

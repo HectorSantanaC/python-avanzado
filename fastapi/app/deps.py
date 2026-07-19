@@ -6,7 +6,7 @@ from database import SessionmLocal, get_db
 from auth import verificar_token
 import crud
 
-oauth2_scheme = OAuth2PasswordBearer(tokenURL="login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 def get_current_user(
     token: str = Depends(oauth2_scheme),
