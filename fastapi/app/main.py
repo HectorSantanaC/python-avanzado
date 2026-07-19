@@ -22,7 +22,7 @@ class Producto(BaseModel):
 def listar_productos(db:Session = Depends(get_db)):
   return crud.obtener_productos(db)
 
-@app.post("/productos", response_model=schemas.ProductoCreate)
+@app.post("/productos", response_model=schemas.ProductoCreate, dependencies=[Depends(require_admin)])
 def agregar_producto(producto: schemas.ProductoCreate, db: Session = Depends(get_db)):
   return crud.crear_producto(db, producto)
 
