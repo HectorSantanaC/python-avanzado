@@ -1,5 +1,8 @@
 from jose import JWTError, jwt
 from datetime import datetime, timedelta, timezone
+from passlib.context import CryptContext
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 SECRET_KEY = "clave_secreta"
 ALGORITHM = "HS256"
@@ -24,3 +27,11 @@ def verificar_token(token: str):
   
   except JWTError:
     return None
+
+def hash_password(password: str):
+  print(repr(password))
+  print(len(password.encode("utf-8")))
+  return pwd_context.hash(password)
+
+def verify_password(password: str, hashed: str):
+  return pwd_context.verify(password, hashed)

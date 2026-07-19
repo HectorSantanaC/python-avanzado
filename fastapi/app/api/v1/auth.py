@@ -3,9 +3,9 @@ from fastapi import Depends, HTTPException, status
 from db.database import get_db
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm
-from utils import verify_password
+from core.security import verify_password
 from deps import get_current_user, require_admin
-from app.authS import crear_token
+from core.security import crear_token
 import crud, schemas
 
 api_router = APIRouter()
