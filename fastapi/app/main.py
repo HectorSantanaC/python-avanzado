@@ -77,6 +77,6 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
 def leer_perfil(current_user = Depends(get_current_user)):
   return current_user
 
-@app.get("admin/ping")
+@app.get("/admin/ping")
 def admin_ping(_admin = Depends(require_admin)):
   return {"ok": True, "role": "admin"}
