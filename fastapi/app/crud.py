@@ -46,5 +46,5 @@ def  crear_categoria(db: Session, categoria: CategoriaCreate):
   db.refresh(db_categoria)
   return db_categoria
 
-def obtener_categoria(db: Session):
+def obtener_categorias(db: Session):
   return db.query(Categoria).all()

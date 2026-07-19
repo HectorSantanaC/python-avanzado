@@ -7,6 +7,8 @@ from database import get_db
 
 app = FastAPI()
 
+### Producto ###
+
 class Producto(BaseModel):
   nombre: str
   precio: float
@@ -36,3 +38,12 @@ def eliminar_producto(producto_id: int, db: Session = Depends(get_db)):
   if not producto:
     raise HTTPException(status_code=404, detail="Producto no encontrado")
   return {"mensaje": "Producto eliminado"}
+
+### Categoría ###
+@app.post("/categorias", response_model=schemas.CategoriaResponse)
+def crear_categoria(categoria: schemas.CategoriaCreate, db: Session = Depends(get_db)):
+  return crud.crear_categoria(db, categoria)
+
+@app.get("/categorias", response_model=list[schemas.CategoriaResponse])
+def listar_categoria(db: Session = Depends(get_db)):
+  return crud.obtener_categorias(db)
