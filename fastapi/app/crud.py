@@ -8,7 +8,7 @@ def crear_producto(db: Session, producto:ProductoCreate):
   db_producto = Producto(**producto.dict())
   db.add(db_producto)
   db.commit()
-  db.refresh()
+  db.refresh(db_producto)
   return db_producto
 
 def obtener_productos(db: Session):
