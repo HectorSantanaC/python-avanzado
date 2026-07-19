@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
-from schemas import CategoriaCreate
-from models import Categoria
+from schemas.categoria import CategoriaCreate
+from models.categoria import Categoria
 
-def  crear_categoria(db: Session, categoria: CategoriaCreate):
+def  crear_categorias(db: Session, categoria: CategoriaCreate):
   db_categoria = Categoria(nombre = categoria.nombre)
   db.add(db_categoria)
   db.commit()

@@ -1,23 +1,23 @@
 from fastapi import APIRouter
-import crud, schemas
 from sqlalchemy.orm import Session
 from fastapi import Depends, HTTPException
-from db.database import get_db
-from deps import require_admin
+from deps.deps import get_db, require_admin
+from crud.producto import obtener_productos, crear_producto
+from schemas.producto import ProductoResponse, ProductoCreate
 
 api_router = APIRouter()
 
-@api_router.get("/productos", response_model=list[schemas.ProductoResponse])
+@api_router.get("/productos", response_model=list[ProductoResponse])
 def listar_productos(db:Session = Depends(get_db)):
-  return crud.obtener_productos(db)
+  return obtener_productos(db)
 
-@api_router.post("/productos", response_model=schemas.ProductoCreate, dependencies=[Depends(require_admin)])
-def agregar_producto(producto: schemas.ProductoCreate, db: Session = Depends(get_db)):
-  return crud.crear_producto(db, producto)
+@api_router.post("/productos", response_model=ProductoCreate, dependencies=[Depends(require_admin)])
+def agregar_producto(producto: ProductoCreate, db: Session = Depends(get_db)):
+  return crear_producto(db, producto)
 
-@api_router.put("/productos/{id}", response_model=list[schemas.ProductoResponse])
-def actualizar_producto(producto_id: int, datos: schemas.ProductoCreate, db: Session = Depends(get_db)):
-  producto = crud.actualizar_producto(db, producto_id, datos)
+@api_router.put("/productos/{id}", response_model=list[ProductoResponse])
+def actualizar_producto(producto_id: int, datos: ProductoCreate, db: Session = Depends(get_db)):
+  producto = actualizar_producto(db, producto_id, datos)
 
   if not producto:
     raise HTTPException(status_code=404, detail="Producto no encontrado")
@@ -26,7 +26,7 @@ def actualizar_producto(producto_id: int, datos: schemas.ProductoCreate, db: Ses
 
 @api_router.delete("/productos/{id}")
 def eliminar_producto(producto_id: int, db: Session = Depends(get_db)):
-  producto = crud.eliminar_producto(db, producto_id)
+  producto = eliminar_producto(db, producto_id)
 
   if not producto:
     raise HTTPException(status_code=404, detail="Producto no encontrado")

@@ -2,7 +2,7 @@ from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends, HTTPException, status
 from jose import JWTError
 from sqlalchemy.orm import Session
-from db.database import SessionmLocal, get_db
+from db.database import SessionmLocal
 from core.security import verificar_token
 import crud
 
