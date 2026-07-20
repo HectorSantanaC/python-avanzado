@@ -21,7 +21,18 @@ class ItemCarrito(Base):
 
 
 class Pedido(Base):
+  __tablename__ = "pedidos"
   id = Column(Integer, primary_key=True, index=True)
   fecha = Column(Datetime, default=datetime.now.utcnow)
   total = Column(Float)
   detalles = relationship("DetallePedido", back_populates="pedido")
+
+class DetallePedido(Base):
+  __tablename__ = "detalles_pedido"
+  id = Column(Integer, primary_key=True, index=True)
+  pedido_id = Column(Integer, ForeignKey("pedidos.id"))
+  producto_id = Column(Integer, ForeignKey("productos.id"))
+  cantidad = Column(Integer)
+  subtotal = Column(Float)
+  pedido = relationship("Pedido", back_populates="detalles")
+  producto = relationship("Producto")
