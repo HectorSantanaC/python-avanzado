@@ -5,7 +5,14 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from models import categoria, producto, usuario
+from models.categoria import Categoria
+from models.pedidos import Pedido
+from models.pedidos import Carrito
+from models.pedidos import ItemCarrito
+from models.pedidos import DetallePedido
+from models.producto import Producto
+from models.usuario import Usuario
+
 from db.database import Base, engine
 
 # this is the Alembic Config object, which provides
