@@ -9,3 +9,12 @@ class carrito(Base):
   usuario_id = Column(Integer, ForeignKey("usuarios.id"))
   usuario = relationship("Usuario", back_populates="carrito")
   items = relationship("ItemCarrito", back_populates="carrito", cascade="all, delete")
+
+class ItemCarrito(Base):
+  __tablename__ = "items_carrito"
+  id = Column(Integer, primary_key=True, index=True)
+  carrito_id = Column(Integer, ForeignKey("carrito.id"))
+  producto_id = Column(Integer, ForeignKey("productos.id"))
+  cantidad = Column(Integer, default=1)
+  carrito = relationship("Carrito", back_populates="items")
+  producto = relationship("Producto")
