@@ -11,3 +11,18 @@ def obterner_carrito(db: Session, usuario_id: int):
     db.refresh(carrito)
   
   return carrito
+
+def agregar_item(db: Session, carrito_id: int, producto_id: int, cantidad: int =1):
+  item = db.query(ItemCarrito).filter(carrito_id = carrito_id, producto_id = producto_id).first()
+
+  if item:
+    item.cantidad += cantidad
+  
+  else:
+    item = ItemCarrito(carrito_id = carrito_id, producto_id = producto_id, cantidad = cantidad)
+    db.add(item)
+  
+  db.commit()
+  db.refresh(item)
+
+  return item
