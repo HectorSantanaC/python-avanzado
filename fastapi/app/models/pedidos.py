@@ -18,3 +18,10 @@ class ItemCarrito(Base):
   cantidad = Column(Integer, default=1)
   carrito = relationship("Carrito", back_populates="items")
   producto = relationship("Producto")
+
+
+class Pedido(Base):
+  id = Column(Integer, primary_key=True, index=True)
+  fecha = Column(Datetime, default=datetime.now.utcnow)
+  total = Column(Float)
+  detalles = relationship("DetallePedido", back_populates="pedido")
