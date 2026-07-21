@@ -19,10 +19,10 @@ class ItemCarrito(Base):
   carrito = relationship("Carrito", back_populates="items")
   producto = relationship("Producto")
 
-
 class Pedido(Base):
   __tablename__ = "pedidos"
   id = Column(Integer, primary_key=True, index=True)
+  usuario_id = Column(Integer, ForeignKey("usuarios.id"))
   fecha = Column(DateTime, default=datetime.now)
   total = Column(Float)
   detalles = relationship("DetallePedido", back_populates="pedido")
