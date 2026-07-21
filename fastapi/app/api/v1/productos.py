@@ -7,7 +7,7 @@ from schemas.producto import ProductoResponse, ProductoCreate
 
 api_router = APIRouter()
 
-@api_router.get("/productos", response_model=list[ProductoResponse])
+@api_router.get("/", response_model=list[ProductoResponse])
 def listar_productos(db:Session = Depends(get_db)):
   return obtener_productos(db)
 
