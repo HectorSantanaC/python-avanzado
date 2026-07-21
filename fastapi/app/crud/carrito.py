@@ -13,7 +13,7 @@ def obterner_carrito(db: Session, usuario_id: int):
   return carrito
 
 def agregar_item(db: Session, carrito_id: int, producto_id: int, cantidad: int =1):
-  item = db.query(ItemCarrito).filter(carrito_id = carrito_id, producto_id = producto_id).first()
+  item = db.query(ItemCarrito).filter(ItemCarrito.carrito_id == carrito_id, ItemCarrito.producto_id == producto_id).first()
 
   if item:
     item.cantidad += cantidad
