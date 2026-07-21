@@ -4,7 +4,7 @@ from jose import JWTError
 from sqlalchemy.orm import Session
 from db.database import SessionmLocal
 from core.security import verificar_token
-import crud
+from crud.usuario import obtener_usuario_por_email
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
@@ -35,7 +35,7 @@ def get_current_user(
   except JWTError:
     raise cred_exc
   
-  user = crud.obtener_usuario_por_email(db, email)
+  user = obtener_usuario_por_email(db, email)
 
   if user is None:
     raise cred_exc

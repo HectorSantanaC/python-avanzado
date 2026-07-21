@@ -3,7 +3,7 @@ from models.producto import Producto
 from models.pedidos import Carrito, DetallePedido, Pedido
 
 def crear_pedido(db: Session, usuario_id: int):
-  carrito = db.query(Carrito).filter(usuario_id = usuario_id).first()
+  carrito = db.query(Carrito).filter(Carrito.usuario_id == usuario_id).first()
 
   if not carrito or not carrito.items:
     raise ValueError("El carrito está vacío")
@@ -20,7 +20,7 @@ def crear_pedido(db: Session, usuario_id: int):
     if producto.en_stock is False or producto.precio <= 0:
       continue
 
-    if item.cantidad > 0 and item.cantidad <= producto.stock:
+    if item.cantidad > 0 and item.cantidad <= producto.stock or 0:
       producto.stock -= item.cantidad
       subtotal = producto.precio * item.cantidad
       detalle = DetallePedido(pedido_id = pedido.id, producto_id = producto.id, cantidad = item.cantidad, subtotal = subtotal)

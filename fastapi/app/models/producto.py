@@ -10,3 +10,4 @@ class Producto(Base):
   en_stock = Column(Boolean, default=True)
   categoria_id = Column(Integer, ForeignKey("categorias.id"))
   categorias = relationship("Categoria", back_populates="productos")
+  stock = Column(Integer, nullable=False, default=0)
