@@ -16,3 +16,7 @@ def list_messages(service: MessageService = Depends(get_message_service)):
 @router.get('/{message_id}', response_model=Optional[Message])
 def get_message(message_id: int, service: MessageService = Depends(get_message_service)):
   return service.find_by_id(message_id)
+
+@router.get('/details/', response_model=Optional[Message])
+def get_message_url_param(id: int, service: MessageService = Depends(get_message_service)):
+  return service.find_by_id(id)
