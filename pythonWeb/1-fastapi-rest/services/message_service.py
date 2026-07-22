@@ -1,8 +1,14 @@
 from typing import List
+from abc import ABC, abstractmethod
+
 from models.message import Message
 
-class MessageService:
+class MessageService(ABC):
+  @abstractmethod
+  def find_all(self) -> List[Message]:
+    ...
 
+class MessageServiceMemoryImpl(MessageService): 
   def __init__(self):
     self.messages: List[Message] = [
       Message(id=1, text='Hola Mundo Python con fastAPI'),
