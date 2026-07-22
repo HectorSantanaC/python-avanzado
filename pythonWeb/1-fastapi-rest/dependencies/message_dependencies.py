@@ -1,4 +1,5 @@
-from services.message_service import MessageService, MessageServiceMemoryImpl
+from services.message_service import MessageService
+from services.message_service_memory_impl import MessageServiceMemoryImpl
 
 def get_message_service() -> MessageService:
   return MessageServiceMemoryImpl()
