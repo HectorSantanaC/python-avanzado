@@ -1,5 +1,5 @@
 from typing import List, Optional
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 from fastapi.params import Depends
 
 from models.message import Message
@@ -18,5 +18,5 @@ def get_message(message_id: int, service: MessageService = Depends(get_message_s
   return service.find_by_id(message_id)
 
 @router.get('/details/', response_model=Optional[Message])
-def get_message_url_param(id: int, service: MessageService = Depends(get_message_service)):
+def get_message_url_param(id: int = Query(..., ge=1), service: MessageService = Depends(get_message_service)):
   return service.find_by_id(id)
